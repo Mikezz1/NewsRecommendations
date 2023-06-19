@@ -37,7 +37,9 @@ class DatasetTrain(IterableDataset):
         )
         user_feature = self.news_combined[click_docs]
 
-        user_feature_ctr = torch.Tensor([self.news_ctr[k] for k in click_docs])
+        user_feature_ctr = torch.Tensor(
+            np.array([self.news_ctr[k] for k in click_docs])
+        )
 
         pos = self.trans_to_nindex(sess_pos)
         neg = self.trans_to_nindex(sess_neg)
@@ -47,7 +49,9 @@ class DatasetTrain(IterableDataset):
         news_feature = self.news_combined[sample_news]
 
         ##########
-        news_feature_ctr = torch.Tensor([self.news_ctr[k] for k in sample_news])
+        news_feature_ctr = torch.Tensor(
+            np.array([self.news_ctr[k] for k in sample_news])
+        )
         ########
         # add ctr here as well
 

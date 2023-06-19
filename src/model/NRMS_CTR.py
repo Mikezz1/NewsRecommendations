@@ -5,6 +5,21 @@ import torch.nn.functional as F
 from .model_utils import AttentionPooling, MultiHeadSelfAttention
 
 
+class CtrEncoder(nn.Module):
+    def __init__(self):
+        super(CtrEncoder, self).__init__()
+
+        self.proj = nn.Sequential(nn.Linear(1, 36), nn.LeakyReLU(), nn.Linear(36, 12))
+
+    def forward(self, x):
+        """
+        Maps float feature to 12-dimensional embedding
+        x: batch_size, n_news
+        """
+        bs = x.size(0)
+        return self.proj(x.flatten()).view(bs, -1)
+
+
 class NewsEncoder(nn.Module):
     def __init__(self, args, embedding_matrix):
         super(NewsEncoder, self).__init__()
@@ -21,10 +36,11 @@ class NewsEncoder(nn.Module):
         self.attn = AttentionPooling(args.news_dim, args.news_query_vector_dim)
         self.ctr = CtrEncoder()
 
-    def forward(self, x, mask=None):
+    def forward(self, x, ctr_vec, mask=None):
         """
         x: batch_size, word_num
         mask: batch_size, word_num
+        ctr_vec: batch_size, 12
         """
         word_vecs = F.dropout(
             self.embedding_matrix(x.long()), p=self.drop_rate, training=self.training
@@ -37,7 +53,7 @@ class NewsEncoder(nn.Module):
         )
 
         news_vec = self.attn(multihead_text_vecs, mask)
-        # concat with CTR here
+        news_vec = torch.cat([news_vec, ctr_vec], dim=1)
 
         return news_vec
 
@@ -49,10 +65,10 @@ class UserEncoder(nn.Module):
         self.dim_per_head = args.news_dim // args.num_attention_heads
         assert args.news_dim == args.num_attention_heads * self.dim_per_head
         self.multi_head_self_attn = MultiHeadSelfAttention(
-            args.news_dim,
+            args.news_dim + 12 * args.num_attention_heads,
             args.num_attention_heads,
-            self.dim_per_head,
-            self.dim_per_head,
+            self.dim_per_head + 12,
+            self.dim_per_head + 12,
         )
         self.attn = AttentionPooling(args.news_dim, args.user_query_vector_dim)
         self.pad_doc = nn.Parameter(torch.empty(1, args.news_dim).uniform_(-1, 1)).type(
@@ -93,6 +109,7 @@ class Model(torch.nn.Module):
 
         self.news_encoder = NewsEncoder(args, word_embedding)
         self.user_encoder = UserEncoder(args)
+        self.ctr_encoder = CtrEncoder()
         self.loss_fn = nn.CrossEntropyLoss()
 
     def forward(
