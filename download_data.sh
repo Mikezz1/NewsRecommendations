@@ -17,4 +17,7 @@ rm glove.840B.300d.zip
 rm MINDsmall_train.zip
 rm MINDsmall_dev.zip
 
+
+wget https://www.dropbox.com/s/z839s0kgjnm5ekl/news_pop.csv?dl=0
+
 echo 'Data download finish.'
