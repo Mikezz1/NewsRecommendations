@@ -1,6 +1,7 @@
 from torch.utils.data import IterableDataset, Dataset
 import numpy as np
 import random
+import torch
 
 
 class DatasetTrain(IterableDataset):
@@ -36,7 +37,7 @@ class DatasetTrain(IterableDataset):
         )
         user_feature = self.news_combined[click_docs]
 
-        user_feature_ctr = [self.news_ctr[k] for k in click_docs]
+        user_feature_ctr = torch.Tensor([self.news_ctr[k] for k in click_docs])
 
         pos = self.trans_to_nindex(sess_pos)
         neg = self.trans_to_nindex(sess_neg)
@@ -46,7 +47,7 @@ class DatasetTrain(IterableDataset):
         news_feature = self.news_combined[sample_news]
 
         ##########
-        news_feature_ctr = [self.news_ctr[k] for k in sample_news]
+        news_feature_ctr = torch.Tensor([self.news_ctr[k] for k in sample_news])
         ########
         # add ctr here as well
 
@@ -81,7 +82,7 @@ class DatasetTest(DatasetTrain):
             self.trans_to_nindex(click_docs), self.args.user_log_length
         )
         user_feature = self.news_scoring[click_docs]
-        user_feature_ctr = [self.news_ctr[k] for k in click_docs]
+        user_feature_ctr = torch.Tensor([self.news_ctr[k] for k in click_docs])
 
         # add ctr for candidates here as well
         candidate_news = self.trans_to_nindex(
@@ -90,7 +91,7 @@ class DatasetTest(DatasetTrain):
         labels = np.array([int(i.split("-")[1]) for i in line[4].split()])
         # add ctr here as well
         news_feature = self.news_scoring[candidate_news]
-        news_feature_ctr = [self.news_ctr[k] for k in candidate_news]
+        news_feature_ctr = torch.Tensor([self.news_ctr[k] for k in candidate_news])
 
         return (
             user_feature,

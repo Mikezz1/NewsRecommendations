@@ -2,9 +2,10 @@ from collections import Counter
 from tqdm import tqdm
 import numpy as np
 from nltk.tokenize import word_tokenize
+import pandas as pd
 
 
-def get_ctr_dict(path):
+def get_ctr_dict(path="news_pop.csv"):
     df = pd.read_csv(path)
     return {item: (ctr, pop) for _, (item, ctr, pop) in df.iterrows()}
 
