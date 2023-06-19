@@ -37,13 +37,13 @@ class ScaledDotProductAttention(nn.Module):
         self.d_k = d_k
 
     def forward(self, Q, K, V, attn_mask=None):
-        '''
-            Q: batch_size, n_head, candidate_num, d_k
-            K: batch_size, n_head, candidate_num, d_k
-            V: batch_size, n_head, candidate_num, d_v
-            attn_mask: batch_size, n_head, candidate_num
-            Return: batch_size, n_head, candidate_num, d_v
-        '''
+        """
+        Q: batch_size, n_head, candidate_num, d_k
+        K: batch_size, n_head, candidate_num, d_k
+        V: batch_size, n_head, candidate_num, d_v
+        attn_mask: batch_size, n_head, candidate_num
+        Return: batch_size, n_head, candidate_num, d_v
+        """
         scores = torch.matmul(Q, K.transpose(-1, -2)) / np.sqrt(self.d_k)
         scores = torch.exp(scores)
 
@@ -76,12 +76,12 @@ class MultiHeadSelfAttention(nn.Module):
                 nn.init.xavier_uniform_(m.weight, gain=1)
 
     def forward(self, Q, K, V, mask=None):
-        '''
-            Q: batch_size, candidate_num, d_model
-            K: batch_size, candidate_num, d_model
-            V: batch_size, candidate_num, d_model
-            mask: batch_size, candidate_num
-        '''
+        """
+        Q: batch_size, candidate_num, d_model
+        K: batch_size, candidate_num, d_model
+        V: batch_size, candidate_num, d_model
+        mask: batch_size, candidate_num
+        """
         batch_size = Q.shape[0]
         if mask is not None:
             mask = mask.unsqueeze(dim=1).expand(-1, self.n_heads, -1)
@@ -91,5 +91,9 @@ class MultiHeadSelfAttention(nn.Module):
         v_s = self.W_V(V).view(batch_size, -1, self.n_heads, self.d_v).transpose(1, 2)
 
         context = self.scaled_dot_product_attn(q_s, k_s, v_s, mask)
-        output = context.transpose(1, 2).contiguous().view(batch_size, -1, self.n_heads * self.d_v)
+        output = (
+            context.transpose(1, 2)
+            .contiguous()
+            .view(batch_size, -1, self.n_heads * self.d_v)
+        )
         return output
