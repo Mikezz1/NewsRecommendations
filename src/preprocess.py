@@ -80,8 +80,8 @@ def get_doc_input(
 
         #############
 
-        news_ctr[doc_index, 0] = ctr_dict[key]
-        print(ctr_dict[key])
+        news_ctr[doc_index, 0] = ctr_dict[key][0] if key in ctr_dict else 0
+        # print(ctr_dict[key])
         ##########
 
         if args.use_category:

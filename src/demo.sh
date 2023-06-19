@@ -1,11 +1,11 @@
 #!/bin/bash
 
 mode=$1
-nGPU=4
+nGPU=1
 model_dir='../model/NAML'
-model='NAML'
-use_category=True
-use_subcategory=True
+model='NRMS'
+use_category=False
+use_subcategory=False
 
 if [ ${mode} == train ]
 then
