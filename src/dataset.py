@@ -112,11 +112,12 @@ class DatasetTest(DatasetTrain):
 
 
 class NewsDataset(Dataset):
-    def __init__(self, data):
+    def __init__(self, data, news_ctr):
         self.data = data
+        self.news_ctr = news_ctr
 
     def __getitem__(self, idx):
-        return self.data[idx]
+        return self.data[idx], self.news_ctr[idx]
 
     def __len__(self):
         return self.data.shape[0]

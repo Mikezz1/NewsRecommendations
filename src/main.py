@@ -12,6 +12,7 @@ from torch.utils.data import DataLoader
 import importlib
 import subprocess
 
+# import wandb
 import utils
 from parameters import parse_args
 from preprocess import read_news, get_doc_input
@@ -224,16 +225,21 @@ def test(rank, args):
         axis=-1,
     )
 
-    news_dataset = NewsDataset(news_combined)
+    news_dataset = NewsDataset(news_combined, news_ctr)
     news_dataloader = DataLoader(
         news_dataset, batch_size=args.batch_size, num_workers=4
     )
 
     news_scoring = []
     with torch.no_grad():
-        for input_ids in tqdm(news_dataloader):
+        for input_ids, _ctr in tqdm(news_dataloader):
             input_ids = input_ids.cuda(rank)
-            news_vec = model.news_encoder(input_ids)
+            print(_ctr.size())
+            _ctr = _ctr.cuda(rank)
+
+            _ctr_vec = model.ctr_encoder(_ctr)
+            news_vec = model.news_encoder(input_ids, _ctr_vec)
+            # print(news_vec.size())
             news_vec = news_vec.to(torch.device("cpu")).detach().numpy()
             news_scoring.extend(news_vec)
 
@@ -258,7 +264,9 @@ def test(rank, args):
         log_mask = torch.FloatTensor([x[1] for x in tuple_list])
         news_vecs = [x[2] for x in tuple_list]
         labels = [x[3] for x in tuple_list]
-        return (log_vecs, log_mask, news_vecs, labels)
+        _news_ctr = [x[4] for x in tuple_list]
+        _user_ctr = [x[5] for x in tuple_list]
+        return (log_vecs, log_mask, news_vecs, labels, _news_ctr, _user_ctr)
 
     dataset = DatasetTest(data_file_path, news_index, news_scoring, args, news_ctr)
     dataloader = DataLoader(dataset, batch_size=args.batch_size, collate_fn=collate_fn)
@@ -285,7 +293,9 @@ def test(rank, args):
 
     local_sample_num = 0
 
-    for cnt, (log_vecs, log_mask, news_vecs, labels) in enumerate(dataloader):
+    for cnt, (log_vecs, log_mask, news_vecs, labels, _news_ctr, _user_ctr) in enumerate(
+        dataloader
+    ):
         local_sample_num += log_vecs.shape[0]
 
         if args.enable_gpu:

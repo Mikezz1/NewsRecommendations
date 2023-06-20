@@ -9,7 +9,7 @@ class CtrEncoder(nn.Module):
     def __init__(self):
         super(CtrEncoder, self).__init__()
 
-        self.proj = nn.Sequential(nn.Linear(1, 36), nn.LeakyReLU(), nn.Linear(36, 12))
+        self.proj = nn.Sequential(nn.Linear(1, 36), nn.LeakyReLU(), nn.Linear(36, 20))
 
     def forward(self, x):
         """
@@ -17,7 +17,8 @@ class CtrEncoder(nn.Module):
         x: batch_size, n_news
         """
         bs = x.size(0)
-        return self.proj(x.flatten()).view(bs, -1)
+        # print(x.squeeze().flatten(),x.squeeze().flatten().T  )
+        return self.proj(x.squeeze().flatten().unsqueeze(1))
 
 
 class NewsEncoder(nn.Module):
@@ -53,7 +54,9 @@ class NewsEncoder(nn.Module):
         )
 
         news_vec = self.attn(multihead_text_vecs, mask)
+        print(news_vec.size())
         news_vec = torch.cat([news_vec, ctr_vec], dim=1)
+        print(news_vec.size())
 
         return news_vec
 
@@ -62,18 +65,18 @@ class UserEncoder(nn.Module):
     def __init__(self, args):
         super(UserEncoder, self).__init__()
         self.args = args
-        self.dim_per_head = args.news_dim // args.num_attention_heads
-        assert args.news_dim == args.num_attention_heads * self.dim_per_head
+        self.dim_per_head = (args.news_dim + 20) // args.num_attention_heads
+        assert 20 + args.news_dim == args.num_attention_heads * self.dim_per_head
         self.multi_head_self_attn = MultiHeadSelfAttention(
-            args.news_dim + 12 * args.num_attention_heads,
+            args.news_dim + 20,
             args.num_attention_heads,
-            self.dim_per_head + 12,
-            self.dim_per_head + 12,
+            self.dim_per_head,
+            self.dim_per_head,
         )
-        self.attn = AttentionPooling(args.news_dim, args.user_query_vector_dim)
-        self.pad_doc = nn.Parameter(torch.empty(1, args.news_dim).uniform_(-1, 1)).type(
-            torch.FloatTensor
-        )
+        self.attn = AttentionPooling(args.news_dim + 20, args.user_query_vector_dim)
+        self.pad_doc = nn.Parameter(
+            torch.empty(1, args.news_dim + 20).uniform_(-1, 1)
+        ).type(torch.FloatTensor)
 
     def forward(self, news_vecs, log_mask=None):
         """
@@ -132,14 +135,16 @@ class Model(torch.nn.Module):
         assert news_feature_ctr.size(1) == candidate.size(1)
         assert user_feature_ctr.size(1) == history.size(1)
         candidate_news = candidate.reshape(-1, self.args.num_words_title)
-        candidate_news_vecs = self.news_encoder(candidate_news).reshape(
-            -1, 1 + self.args.npratio, self.args.news_dim
+        ctr_vec2 = self.ctr_encoder(news_feature_ctr)
+        candidate_news_vecs = self.news_encoder(candidate_news, ctr_vec2).reshape(
+            -1, 1 + self.args.npratio, self.args.news_dim + 20
         )
         # add CTR to candidate_news_vecs here
 
+        ctr_vec1 = self.ctr_encoder(user_feature_ctr)
         history_news = history.reshape(-1, self.args.num_words_title)
-        history_news_vecs = self.news_encoder(history_news).reshape(
-            -1, self.args.user_log_length, self.args.news_dim
+        history_news_vecs = self.news_encoder(history_news, ctr_vec1).reshape(
+            -1, self.args.user_log_length, self.args.news_dim + 20
         )
         # add CTR to history_news_vecs here
 
