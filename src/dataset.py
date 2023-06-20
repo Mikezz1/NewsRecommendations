@@ -86,7 +86,9 @@ class DatasetTest(DatasetTrain):
             self.trans_to_nindex(click_docs), self.args.user_log_length
         )
         user_feature = self.news_scoring[click_docs]
-        user_feature_ctr = torch.Tensor([self.news_ctr[k] for k in click_docs])
+        user_feature_ctr = torch.Tensor(
+            np.array([self.news_ctr[k] for k in click_docs])
+        )
 
         # add ctr for candidates here as well
         candidate_news = self.trans_to_nindex(

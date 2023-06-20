@@ -1,14 +1,16 @@
 #!/bin/bash
 
 mode=$1
-#nGPU=1
-model_dir='../model/NAML'
-model='NAML'
+nGPU=1
+model_dir='../model/NRMS'
+model='NRMS'
 use_category=False
 use_subcategory=False
 train_data_dir='../../data/MINDsmall_train'
 test_data_dir='../../data/MINDsmall_dev'
 enable_gpu=False
+glove_embedding_path='../../data/glove.6B.300d.txt'
+log_steps=10
 
 if [ ${mode} == train ]
 then
@@ -20,7 +22,7 @@ then
  python -u main.py --mode train --model_dir ${model_dir} --batch_size ${batch_size} --epochs ${epochs} --model ${model} \
  --lr ${lr} --user_log_mask ${user_log_mask} --prepare ${prepare} --nGPU ${nGPU} \
  --use_category ${use_category} --use_subcategory ${use_subcategory} --train_data_dir ${train_data_dir} --test_data_dir ${test_data_dir}\
- --enable_gpu ${enable_gpu}
+ --enable_gpu ${enable_gpu} --glove_embedding_path ${glove_embedding_path} --log_steps ${log_steps}
 elif [ ${mode} == test ]
 then
  user_log_mask=True

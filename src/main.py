@@ -33,7 +33,8 @@ def train(rank, args):
             "nccl", world_size=args.nGPU, init_method="env://", rank=rank
         )
 
-    torch.cuda.set_device(rank)
+    if torch.cuda.is_available():
+        torch.cuda.set_device(rank)
 
     news, news_index, category_dict, subcategory_dict, word_dict, ctr = read_news(
         os.path.join(args.train_data_dir, "news.tsv"), args, mode="train"
@@ -188,7 +189,8 @@ def test(rank, args):
             "nccl", world_size=args.nGPU, init_method="env://", rank=rank
         )
 
-    torch.cuda.set_device(rank)
+    if torch.cuda.is_available():
+        torch.cuda.set_device(rank)
 
     if args.load_ckpt_name is not None:
         ckpt_path = utils.get_checkpoint(args.model_dir, args.load_ckpt_name)
@@ -234,11 +236,12 @@ def test(rank, args):
     with torch.no_grad():
         for input_ids, _ctr in tqdm(news_dataloader):
             input_ids = input_ids.cuda(rank)
-            print(_ctr.size())
-            _ctr = _ctr.cuda(rank)
 
-            _ctr_vec = model.ctr_encoder(_ctr)
+            _ctr = _ctr.cuda(rank)
+            _ctr_vec = _ctr.view(-1, 1, 1).float()
+            _ctr_vec = model.ctr_encoder(_ctr_vec)
             news_vec = model.news_encoder(input_ids, _ctr_vec)
+
             # print(news_vec.size())
             news_vec = news_vec.to(torch.device("cpu")).detach().numpy()
             news_scoring.extend(news_vec)
@@ -271,12 +274,15 @@ def test(rank, args):
     dataset = DatasetTest(data_file_path, news_index, news_scoring, args, news_ctr)
     dataloader = DataLoader(dataset, batch_size=args.batch_size, collate_fn=collate_fn)
 
-    from metrics import roc_auc_score, ndcg_score, mrr_score
+    from metrics import roc_auc_score, ndcg_score, mrr_score, precision, recall
 
     AUC = []
     MRR = []
     nDCG5 = []
     nDCG10 = []
+    Precision10 = []
+    Recall10 = []
+    Recall20 = []
 
     def print_metrics(rank, cnt, x):
         logging.info(
@@ -319,14 +325,24 @@ def test(rank, args):
             mrr = mrr_score(label, score)
             ndcg5 = ndcg_score(label, score, k=5)
             ndcg10 = ndcg_score(label, score, k=10)
+            precision10 = precision(label, score, k=10)
+            recall10 = recall(label, score, k=10)
+            recall20 = recall(label, score, k=20)
 
             AUC.append(auc)
             MRR.append(mrr)
             nDCG5.append(ndcg5)
             nDCG10.append(ndcg10)
+            Precision10.append(precision10)
+            Recall10.append(recall10)
+            Recall20.append(recall20)
 
         if cnt % args.log_steps == 0:
-            print_metrics(rank, local_sample_num, get_mean([AUC, MRR, nDCG5, nDCG10]))
+            print_metrics(
+                rank,
+                local_sample_num,
+                get_mean([AUC, MRR, nDCG5, nDCG10, Precision10, Recall10, Recall20]),
+            )
 
     logging.info("[{}] local_sample_num: {}".format(rank, local_sample_num))
     if is_distributed:
@@ -339,7 +355,11 @@ def test(rank, args):
         if rank == 0:
             print_metrics("*", local_sample_num, local_metrics_sum / local_sample_num)
     else:
-        print_metrics("*", local_sample_num, get_mean([AUC, MRR, nDCG5, nDCG10]))
+        print_metrics(
+            "*",
+            local_sample_num,
+            get_mean([AUC, MRR, nDCG5, nDCG10, precision10, recall10, recall20]),
+        )
 
 
 if __name__ == "__main__":

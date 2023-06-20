@@ -27,3 +27,22 @@ def ctr_score(y_true, y_score, k=1):
     order = np.argsort(y_score)[::-1]
     y_true = np.take(y_true, order[:k])
     return np.mean(y_true)
+
+
+def precision(y_true, y_score, k=10):
+    order = np.argsort(y_score)[::-1]
+    y_true = np.take(y_true, order[:k])
+    return np.mean(y_true)
+
+
+def recall(y_true, y_score, k=10):
+    n_positive = np.sum(y_true)
+    order = np.argsort(y_score)[::-1]
+    y_true = np.take(y_true, order[:k])
+    return np.sum(y_true) / n_positive
+
+
+# def item_recall(y_true, y_score, k=1):
+#     order = np.argsort(y_score)[::-1]
+#     y_true = np.take(y_true, order[:k])
+#     return np.mean(y_true)
