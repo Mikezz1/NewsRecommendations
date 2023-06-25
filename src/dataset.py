@@ -5,13 +5,14 @@ import torch
 
 
 class DatasetTrain(IterableDataset):
-    def __init__(self, filename, news_index, news_combined, args, news_ctr):
+    def __init__(self, filename, news_index, news_combined, args, news_ctr, news_pop):
         super(DatasetTrain).__init__()
         self.filename = filename
         self.news_index = news_index
         self.news_combined = news_combined
         self.args = args
         self.news_ctr = news_ctr
+        self.news_pop = news_pop
         # add ctr here as well
 
     def trans_to_nindex(self, nids):
@@ -41,6 +42,10 @@ class DatasetTrain(IterableDataset):
             np.array([self.news_ctr[k] for k in click_docs])
         )
 
+        user_feature_pop = torch.Tensor(
+            np.array([self.news_pop[k] for k in click_docs])
+        )
+
         pos = self.trans_to_nindex(sess_pos)
         neg = self.trans_to_nindex(sess_neg)
 
@@ -52,6 +57,10 @@ class DatasetTrain(IterableDataset):
         news_feature_ctr = torch.Tensor(
             np.array([self.news_ctr[k] for k in sample_news])
         )
+
+        news_feature_pop = torch.Tensor(
+            np.array([self.news_pop[k] for k in sample_news])
+        )
         ########
         # add ctr here as well
 
@@ -62,6 +71,8 @@ class DatasetTrain(IterableDataset):
             label,
             news_feature_ctr,
             user_feature_ctr,
+            news_feature_pop,
+            user_feature_pop,
         )  # add ctr here as well
 
     def __iter__(self):
@@ -114,12 +125,17 @@ class DatasetTest(DatasetTrain):
 
 
 class NewsDataset(Dataset):
-    def __init__(self, data, news_ctr):
+    def __init__(self, data, news_ctr, news_pop):
         self.data = data
         self.news_ctr = news_ctr
+        self.news_pop = news_pop
 
     def __getitem__(self, idx):
-        return self.data[idx], self.news_ctr[idx]
+        return (
+            self.data[idx],
+            self.news_ctr[idx],
+            self.news_pop[idx],
+        )
 
     def __len__(self):
         return self.data.shape[0]

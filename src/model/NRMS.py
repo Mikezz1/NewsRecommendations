@@ -6,20 +6,38 @@ from .model_utils import AttentionPooling, MultiHeadSelfAttention
 
 
 class CtrEncoder(nn.Module):
-    def __init__(self):
+    def __init__(self, use_pop=True):
         super(CtrEncoder, self).__init__()
+        self.use_pop = use_pop
+        if not self.use_pop:
+            self.proj = nn.Sequential(
+                nn.Linear(1, 128), nn.LeakyReLU(), nn.Linear(128, 300)
+            )
+        else:
+            self.proj = nn.Sequential(
+                nn.Linear(2, 128), nn.LeakyReLU(), nn.Linear(128, 300)
+            )
 
-        self.proj = nn.Sequential(
-            nn.Linear(1, 128), nn.LeakyReLU(), nn.Linear(128, 300)
-        )
-
-    def forward(self, x):
+    def forward(self, x1, x2=None):
         """
         Maps float feature to 12-dimensional embedding
         x: batch_size, n_news
         """
         # print(x.squeeze().flatten(),x.squeeze().flatten().T  )
-        return self.proj(x.squeeze().flatten().unsqueeze(1))
+        if self.use_pop:
+            x2 = 1 + torch.log(1 + x2)
+            x = torch.cat(
+                [
+                    x1.squeeze().flatten().unsqueeze(1),
+                    x2.squeeze().flatten().unsqueeze(1),
+                ],
+                dim=1,
+            )
+
+        else:
+            x = x1.squeeze().flatten().unsqueeze(1)
+        x = self.proj(x)
+        return x
 
 
 class NewsEncoder(nn.Module):
@@ -48,8 +66,9 @@ class NewsEncoder(nn.Module):
             self.embedding_matrix(x.long()), p=self.drop_rate, training=self.training
         )
         # (batch_size, word_num, word_embedding_dim)
-        ctr_vec = ctr_vec.unsqueeze(1)
-        word_vecs = torch.cat([word_vecs, ctr_vec], dim=1)
+        if ctr_vec is not None:
+            ctr_vec = ctr_vec.unsqueeze(1)
+            word_vecs = torch.cat([word_vecs, ctr_vec], dim=1)
 
         multihead_text_vecs = self.multi_head_self_attn(
             word_vecs, word_vecs, word_vecs, mask
@@ -114,7 +133,8 @@ class Model(torch.nn.Module):
 
         self.news_encoder = NewsEncoder(args, word_embedding)
         self.user_encoder = UserEncoder(args)
-        self.ctr_encoder = CtrEncoder()
+        if args.use_ctr:
+            self.ctr_encoder = CtrEncoder(args.use_pop)
         self.loss_fn = nn.CrossEntropyLoss()
 
     def forward(
@@ -125,6 +145,8 @@ class Model(torch.nn.Module):
         label,
         user_feature_ctr,
         news_feature_ctr,
+        user_feature_pop,
+        news_feature_pop,
     ):  # add CTR arguments here
         """
         history: batch_size, history_length, num_word_title
@@ -136,14 +158,22 @@ class Model(torch.nn.Module):
         """
         assert news_feature_ctr.size(1) == candidate.size(1)
         assert user_feature_ctr.size(1) == history.size(1)
+        assert news_feature_pop.size(1) == candidate.size(1)
+        assert user_feature_pop.size(1) == history.size(1)
         candidate_news = candidate.reshape(-1, self.args.num_words_title)
-        ctr_vec2 = self.ctr_encoder(news_feature_ctr)
+        if self.args.use_ctr:
+            ctr_vec2 = self.ctr_encoder(news_feature_ctr, news_feature_pop)
+        else:
+            ctr_vec2 = None
         candidate_news_vecs = self.news_encoder(candidate_news, ctr_vec2).reshape(
             -1, 1 + self.args.npratio, self.args.news_dim
         )
         # add CTR to candidate_news_vecs here
 
-        ctr_vec1 = self.ctr_encoder(user_feature_ctr)
+        if self.args.use_ctr:
+            ctr_vec1 = self.ctr_encoder(user_feature_ctr, user_feature_pop)
+        else:
+            ctr_vec1 = None
         history_news = history.reshape(-1, self.args.num_words_title)
         history_news_vecs = self.news_encoder(history_news, ctr_vec1).reshape(
             -1, self.args.user_log_length, self.args.news_dim

@@ -97,4 +97,4 @@ def get_doc_input(
 
         # add CTR here as fixed news attribute like category and subcategory
 
-    return news_title, news_category, news_subcategory, news_ctr
+    return news_title, news_category, news_subcategory, news_ctr, news_pop

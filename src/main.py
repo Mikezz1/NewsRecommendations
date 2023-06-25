@@ -41,7 +41,7 @@ def train(rank, args):
         os.path.join(args.train_data_dir, "news.tsv"), args, mode="train"
     )
 
-    news_title, news_category, news_subcategory, news_ctr = get_doc_input(
+    news_title, news_category, news_subcategory, news_ctr, news_pop = get_doc_input(
         news, news_index, category_dict, subcategory_dict, word_dict, args, ctr
     )
     news_combined = np.concatenate(
@@ -67,11 +67,11 @@ def train(rank, args):
         args, embedding_matrix
     )  #  len(category_dict), len(subcategory_dict)
 
-    if args.load_ckpt_name is not None:
-        ckpt_path = utils.get_checkpoint(args.model_dir, args.load_ckpt_name)
-        checkpoint = torch.load(ckpt_path, map_location="cpu")
-        model.load_state_dict(checkpoint["model_state_dict"])
-        logging.info(f"Model loaded from {ckpt_path}.")
+    # if args.load_ckpt_name is not None:
+    #     ckpt_path = utils.get_checkpoint(args.model_dir, args.load_ckpt_name)
+    #     checkpoint = torch.load(ckpt_path, map_location="cpu")
+    #     model.load_state_dict(checkpoint["model_state_dict"])
+    #     logging.info(f"Model loaded from {ckpt_path}.")
 
     optimizer = optim.Adam(model.parameters(), lr=args.lr)
 
@@ -91,7 +91,7 @@ def train(rank, args):
     )
 
     dataset = DatasetTrain(
-        data_file_path, news_index, news_combined, args, news_ctr
+        data_file_path, news_index, news_combined, args, news_ctr, news_pop
     )  # add ctr here as well
     dataloader = DataLoader(dataset, batch_size=args.batch_size)
 
@@ -106,6 +106,8 @@ def train(rank, args):
             targets,
             news_feature_ctr,
             user_feature_ctr,
+            news_feature_pop,
+            user_feature_pop,
         ) in enumerate(
             dataloader
         ):  # add ctr here
@@ -116,6 +118,8 @@ def train(rank, args):
                 targets = targets.cuda(rank, non_blocking=True)
                 user_feature_ctr = user_feature_ctr.cuda(rank, non_blocking=True)
                 news_feature_ctr = news_feature_ctr.cuda(rank, non_blocking=True)
+                user_feature_pop = user_feature_pop.cuda(rank, non_blocking=True)
+                news_feature_pop = news_feature_pop.cuda(rank, non_blocking=True)
 
             bz_loss, y_hat = model(
                 log_ids,
@@ -124,6 +128,8 @@ def train(rank, args):
                 targets,
                 user_feature_ctr,
                 news_feature_ctr,
+                user_feature_pop,
+                news_feature_pop,
             )  # add ctr here
             loss += bz_loss.data.float()
             accuary += utils.acc(targets, y_hat)
@@ -228,7 +234,7 @@ def test(rank, args):
     news, news_index, ctr = read_news(
         os.path.join(args.test_data_dir, "news.tsv"), args, mode="test"
     )
-    news_title, news_category, news_subcategory, news_ctr = get_doc_input(
+    news_title, news_category, news_subcategory, news_ctr, news_pop = get_doc_input(
         news, news_index, category_dict, subcategory_dict, word_dict, args, ctr
     )
     news_combined = np.concatenate(
@@ -236,20 +242,25 @@ def test(rank, args):
         axis=-1,
     )
 
-    news_dataset = NewsDataset(news_combined, news_ctr)
+    news_dataset = NewsDataset(news_combined, news_ctr, news_pop)
     news_dataloader = DataLoader(
         news_dataset, batch_size=args.batch_size, num_workers=4
     )
 
     news_scoring = []
     with torch.no_grad():
-        for input_ids, _ctr in tqdm(news_dataloader):
+        for input_ids, _ctr, _pop in tqdm(news_dataloader):
             input_ids = input_ids.cuda(rank)
 
             _ctr = _ctr.cuda(rank)
             _ctr_vec = _ctr.view(-1, 1, 1).float()
             _ctr_vec = model.ctr_encoder(_ctr_vec)
-            news_vec = model.news_encoder(input_ids, _ctr_vec)
+
+            _pop = _pop.cuda(rank)
+            _pop_vec = _pop.view(-1, 1, 1).float()
+            _pop_vec = model.ctr_encoder(_pop_vec)
+
+            news_vec = model.news_encoder(input_ids, _ctr_vec, _pop_vec)
 
             # print(news_vec.size())
             news_vec = news_vec.to(torch.device("cpu")).detach().numpy()
@@ -392,8 +403,11 @@ if __name__ == "__main__":
     os.environ["MASTER_ADDR"] = "localhost"
     os.environ["MASTER_PORT"] = "8888"
     Path(args.model_dir).mkdir(parents=True, exist_ok=True)
-    wandb.init(project="NRMS")
+    wandb.init(project="NRMS", config=vars(args))
     test_after_train = True
+
+    if args.use_ctr:
+        args.num_words_title += 1
 
     if "train" in args.mode:
         if args.prepare:

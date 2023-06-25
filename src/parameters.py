@@ -52,10 +52,14 @@ def parse_args():
     parser.add_argument("--drop_rate", type=float, default=0.2)
     parser.add_argument("--save_steps", type=int, default=10000)
     parser.add_argument("--start_epoch", type=int, default=0)
-    parser.add_argument("--load_ckpt_name", type=str, default=None)
+    parser.add_argument(
+        "--load_ckpt_name", type=str, default="../model/NRMS/epoch-5.pt"
+    )
     parser.add_argument("--use_category", type=utils.str2bool, default=False)
     parser.add_argument("--use_subcategory", type=utils.str2bool, default=False)
     parser.add_argument("--category_emb_dim", type=int, default=100)
+    parser.add_argument("--use_ctr", type=utils.str2bool, default=False)
+    parser.add_argument("--use_pop", type=utils.str2bool, default=False)
 
     args = parser.parse_args()
     return args

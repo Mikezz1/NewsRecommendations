@@ -6,12 +6,15 @@ model_dir='../model/NRMS'
 model='NRMS'
 use_category=False
 use_subcategory=False
-train_data_dir='../../data/MINDsmall_train'
-test_data_dir='../../data/MINDsmall_dev'
-enable_gpu=False
-glove_embedding_path='../../data/glove.6B.300d.txt'
+train_data_dir='../data/MINDsmall_train'
+test_data_dir='../data/MINDsmall_dev'
+enable_gpu=True
+glove_embedding_path='../data/glove.840B.300d.txt'
 log_steps=10
-num_words_title=21
+num_words_title=20
+load_ckpt_name='../model/NRMS/epoch-5.pt'
+use_ctr=True
+use_pop=True
 
 
 if [ ${mode} == train ]
@@ -39,7 +42,10 @@ then
                 --test_data_dir ${test_data_dir}\
                 --enable_gpu ${enable_gpu} \
                 --glove_embedding_path ${glove_embedding_path} \
-                --log_steps ${log_steps}
+                --log_steps ${log_steps} \
+                --use_ctr ${use_ctr} \
+                --use_pop ${use_pop}
+                
 
  user_log_mask=True
  batch_size=128

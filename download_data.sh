@@ -4,7 +4,7 @@ mkdir data
 cd data
 
 # Dowload GloVe pre-trained word embedding and unzip
-wget https://nlp.stanford.edu/data/glove.840B.300d.zip
+wget https://huggingface.co/stanfordnlp/glove/resolve/main/glove.840B.300d.zip
 unzip glove.840B.300d.zip
 
 # Download MIND-small dataset and unzip
