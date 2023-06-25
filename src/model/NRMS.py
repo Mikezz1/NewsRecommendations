@@ -25,7 +25,7 @@ class CtrEncoder(nn.Module):
         """
         # print(x.squeeze().flatten(),x.squeeze().flatten().T  )
         if self.use_pop:
-            x2 = 1 + torch.log(1 + x2)
+            x2 = (1 + torch.log(1 + x2)) / 11.0449
             x = torch.cat(
                 [
                     x1.squeeze().flatten().unsqueeze(1),
