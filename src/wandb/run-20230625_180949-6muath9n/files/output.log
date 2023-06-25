@@ -1,0 +1,10 @@
+[INFO 2023-06-25 18:09:56,798] Preparing testing data...
+[INFO 2023-06-25 18:09:56,883] Writing files...
+[INFO 2023-06-25 18:09:56,961] 73152 testing samples in total.
+73152it [00:00, 991163.91it/s]
+Traceback (most recent call last):
+  File "/Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/main.py", line 445, in <module>
+    test(None, args)
+  File "/Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/main.py", line 207, in test
+    assert ckpt_path is not None, "No checkpoint found."
+UnboundLocalError: local variable 'ckpt_path' referenced before assignment

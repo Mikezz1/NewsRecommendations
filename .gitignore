@@ -4,4 +4,5 @@ __pycache__
 data/*
 model/*
 news_pop.csv
-
+wandb/*
+src/wandb/*

@@ -68,6 +68,7 @@ def get_doc_input(
     )
 
     news_ctr = np.zeros((news_num, 1), dtype="int32")
+    news_pop = np.zeros((news_num, 1), dtype="int32")
 
     for key in tqdm(news):
         title, category, subcategory = news[key]  # add CTR here as fixed news attribute
@@ -81,6 +82,7 @@ def get_doc_input(
         #############
 
         news_ctr[doc_index, 0] = ctr_dict[key][0] if key in ctr_dict else 0
+        news_pop[doc_index, 0] = ctr_dict[key][1] if key in ctr_dict else 0
         # print(ctr_dict[key])
         ##########
 

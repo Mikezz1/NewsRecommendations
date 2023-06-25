@@ -11,6 +11,7 @@ import random
 from torch.utils.data import DataLoader
 import importlib
 import subprocess
+import wandb
 
 # import wandb
 import utils
@@ -131,6 +132,14 @@ def train(rank, args):
             optimizer.step()
 
             if cnt % args.log_steps == 0:
+                wandb.log(
+                    {
+                        "loss": loss.data / cnt,
+                        "accuracy": accuary / cnt,
+                        "train_step": cnt,
+                        "epoch": ep,
+                    }
+                )
                 logging.info(
                     "[{}] Ed: {}, train_loss: {:.5f}, acc: {:.5f}".format(
                         rank, cnt * args.batch_size, loss.data / cnt, accuary / cnt
@@ -355,6 +364,18 @@ def test(rank, args):
         if rank == 0:
             print_metrics("*", local_sample_num, local_metrics_sum / local_sample_num)
     else:
+        wandb.log(
+            {
+                "AUC": np.mean(AUC),
+                "nDCG5": np.mean(MRR),
+                "nDCG10": np.mean(nDCG5),
+                "precision10": np.mean(nDCG10),
+                "recall10": np.mean(precision10),
+                "recall20": np.mean(recall10),
+                "MRR": np.mean(recall20),
+            }
+        )
+
         print_metrics(
             "*",
             local_sample_num,
@@ -371,6 +392,8 @@ if __name__ == "__main__":
     os.environ["MASTER_ADDR"] = "localhost"
     os.environ["MASTER_PORT"] = "8888"
     Path(args.model_dir).mkdir(parents=True, exist_ok=True)
+    wandb.init(project="NRMS")
+    test_after_train = True
 
     if "train" in args.mode:
         if args.prepare:
@@ -401,7 +424,7 @@ if __name__ == "__main__":
         else:
             torch.multiprocessing.spawn(train, nprocs=args.nGPU, args=(args,))
 
-    if "test" in args.mode:
+    if ("test" in args.mode) or test_after_train:
         if args.prepare:
             logging.info("Preparing testing data...")
             total_sample_num = prepare_testing_data(args.test_data_dir, args.nGPU)

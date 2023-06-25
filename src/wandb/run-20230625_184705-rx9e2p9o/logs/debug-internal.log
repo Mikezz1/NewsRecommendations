@@ -1,0 +1,366 @@
+2023-06-25 18:47:05,262 INFO    StreamThr :88283 [internal.py:wandb_internal():86] W&B internal server running at pid: 88283, started at: 2023-06-25 18:47:05.262005
+2023-06-25 18:47:05,264 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status
+2023-06-25 18:47:05,270 INFO    WriterThread:88283 [datastore.py:open_for_write():85] open: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/run-rx9e2p9o.wandb
+2023-06-25 18:47:05,271 DEBUG   SenderThread:88283 [sender.py:send():369] send: header
+2023-06-25 18:47:05,302 DEBUG   SenderThread:88283 [sender.py:send():369] send: run
+2023-06-25 18:47:05,782 INFO    SenderThread:88283 [dir_watcher.py:__init__():211] watching files in: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files
+2023-06-25 18:47:05,782 INFO    SenderThread:88283 [sender.py:_start_run_threads():1100] run started: rx9e2p9o with start time 1687708025.261999
+2023-06-25 18:47:05,783 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:47:05,783 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:47:05,793 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: check_version
+2023-06-25 18:47:05,794 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: check_version
+2023-06-25 18:47:05,919 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: run_start
+2023-06-25 18:47:05,929 DEBUG   HandlerThread:88283 [system_info.py:__init__():31] System info init
+2023-06-25 18:47:05,929 DEBUG   HandlerThread:88283 [system_info.py:__init__():46] System info init done
+2023-06-25 18:47:05,929 INFO    HandlerThread:88283 [system_monitor.py:start():181] Starting system monitor
+2023-06-25 18:47:05,929 INFO    SystemMonitor:88283 [system_monitor.py:_start():145] Starting system asset monitoring threads
+2023-06-25 18:47:05,929 INFO    HandlerThread:88283 [system_monitor.py:probe():201] Collecting system info
+2023-06-25 18:47:05,930 DEBUG   HandlerThread:88283 [system_info.py:probe():195] Probing system
+2023-06-25 18:47:05,930 INFO    SystemMonitor:88283 [interfaces.py:start():190] Started cpu monitoring
+2023-06-25 18:47:05,930 INFO    SystemMonitor:88283 [interfaces.py:start():190] Started disk monitoring
+2023-06-25 18:47:05,934 INFO    SystemMonitor:88283 [interfaces.py:start():190] Started gpuapple monitoring
+2023-06-25 18:47:05,939 INFO    SystemMonitor:88283 [interfaces.py:start():190] Started memory monitoring
+2023-06-25 18:47:05,940 INFO    SystemMonitor:88283 [interfaces.py:start():190] Started network monitoring
+2023-06-25 18:47:05,943 DEBUG   HandlerThread:88283 [system_info.py:_probe_git():180] Probing git
+2023-06-25 18:47:05,980 DEBUG   HandlerThread:88283 [system_info.py:_probe_git():188] Probing git done
+2023-06-25 18:47:05,980 DEBUG   HandlerThread:88283 [system_info.py:probe():240] Probing system done
+2023-06-25 18:47:05,980 DEBUG   HandlerThread:88283 [system_monitor.py:probe():210] {'os': 'macOS-12.3-arm64-arm-64bit', 'python': '3.9.0', 'heartbeatAt': '2023-06-25T15:47:05.930717', 'startedAt': '2023-06-25T15:47:05.256381', 'docker': None, 'cuda': None, 'args': ('--mode', 'train', '--model_dir', '../model/NRMS', '--batch_size', '32', '--epochs', '1', '--model', 'NRMS', '--num_words_title', '21', '--lr', '0.0003', '--user_log_mask', 'False', '--prepare', 'True', '--nGPU', '1', '--use_category', 'False', '--use_subcategory', 'False', '--train_data_dir', '../../data/MINDsmall_train', '--test_data_dir', '../../data/MINDsmall_dev', '--enable_gpu', 'False', '--glove_embedding_path', '../../data/glove.6B.300d.txt', '--log_steps', '10'), 'state': 'running', 'program': '/Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/main.py', 'codePath': 'src/main.py', 'git': {'remote': 'https://github.com/Mikezz1/NewsRecommendations.git', 'commit': 'd5b219a938cbb6b29ea9b3aefb0a6593b11e7abf'}, 'email': None, 'root': '/Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations', 'host': 'Mihails-MacBook-Pro.local', 'username': 'mikhailoleynik', 'executable': '/Users/mikhailoleynik/miniforge3/envs/recenvc/bin/python', 'cpu_count': 10, 'cpu_count_logical': 10, 'disk': {'total': 926.3517189025879, 'used': 275.54184341430664}, 'gpuapple': {'type': 'arm', 'vendor': 'Apple'}, 'memory': {'total': 16.0}}
+2023-06-25 18:47:05,981 INFO    HandlerThread:88283 [system_monitor.py:probe():211] Finished collecting system info
+2023-06-25 18:47:05,981 INFO    HandlerThread:88283 [system_monitor.py:probe():214] Publishing system info
+2023-06-25 18:47:05,981 DEBUG   HandlerThread:88283 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2023-06-25 18:47:05,981 DEBUG   HandlerThread:88283 [system_info.py:_save_pip():67] Saving pip packages done
+2023-06-25 18:47:05,982 DEBUG   HandlerThread:88283 [system_info.py:_save_conda():74] Saving list of conda packages installed into the current environment
+2023-06-25 18:47:06,794 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_created():272] file/dir created: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:47:06,795 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_created():272] file/dir created: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/requirements.txt
+2023-06-25 18:47:06,796 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_created():272] file/dir created: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/conda-environment.yaml
+2023-06-25 18:47:17,526 DEBUG   HandlerThread:88283 [system_info.py:_save_conda():86] Saving conda packages done
+2023-06-25 18:47:17,526 INFO    HandlerThread:88283 [system_monitor.py:probe():216] Finished publishing system info
+2023-06-25 18:47:17,541 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:47:17,542 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: keepalive
+2023-06-25 18:47:17,542 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:47:17,543 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: keepalive
+2023-06-25 18:47:17,544 DEBUG   SenderThread:88283 [sender.py:send():369] send: files
+2023-06-25 18:47:17,544 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-metadata.json with policy now
+2023-06-25 18:47:17,558 DEBUG   SenderThread:88283 [sender.py:send():369] send: telemetry
+2023-06-25 18:47:17,559 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:47:17,559 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:47:17,841 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/conda-environment.yaml
+2023-06-25 18:47:17,842 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_created():272] file/dir created: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-metadata.json
+2023-06-25 18:47:17,842 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_created():272] file/dir created: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:47:18,258 INFO    wandb-upload_0:88283 [upload_job.py:push():133] Uploaded file /var/folders/63/lh47jz9d1rgg48nqhtq1mf0m0000gn/T/tmpcosvz1p2wandb/cb6ohfkw-wandb-metadata.json
+2023-06-25 18:47:19,846 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:47:20,970 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:47:21,853 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:47:23,864 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:47:25,869 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:47:26,000 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:47:27,879 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:47:29,887 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:47:31,893 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:47:31,935 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:47:32,560 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:47:32,561 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:47:37,766 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:47:38,928 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/config.yaml
+2023-06-25 18:47:39,933 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:47:40,476 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: partial_history
+2023-06-25 18:47:40,479 DEBUG   SenderThread:88283 [sender.py:send():369] send: history
+2023-06-25 18:47:40,479 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:47:40,479 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:47:40,939 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:47:41,943 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:47:43,492 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:47:47,564 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:47:47,564 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:47:48,752 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:47:53,769 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:47:58,794 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:47:59,459 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: partial_history
+2023-06-25 18:47:59,473 DEBUG   SenderThread:88283 [sender.py:send():369] send: history
+2023-06-25 18:47:59,474 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:47:59,477 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:48:00,019 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:48:00,019 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:48:02,566 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:48:02,568 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:48:04,750 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:48:05,941 DEBUG   SystemMonitor:88283 [system_monitor.py:_start():159] Starting system metrics aggregation loop
+2023-06-25 18:48:05,944 DEBUG   SenderThread:88283 [sender.py:send():369] send: telemetry
+2023-06-25 18:48:05,944 DEBUG   SenderThread:88283 [sender.py:send():369] send: stats
+2023-06-25 18:48:09,962 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:48:11,065 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/config.yaml
+2023-06-25 18:48:15,208 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:48:17,575 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:48:17,577 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:48:17,735 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: partial_history
+2023-06-25 18:48:17,775 DEBUG   SenderThread:88283 [sender.py:send():369] send: history
+2023-06-25 18:48:17,776 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:48:17,780 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:48:18,095 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:48:20,102 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:48:20,797 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:48:25,823 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:48:30,848 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:48:32,577 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:48:32,577 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:48:34,177 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: partial_history
+2023-06-25 18:48:34,178 DEBUG   SenderThread:88283 [sender.py:send():369] send: history
+2023-06-25 18:48:34,178 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:48:34,179 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:48:35,172 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:48:35,948 DEBUG   SenderThread:88283 [sender.py:send():369] send: stats
+2023-06-25 18:48:35,948 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:48:36,178 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:48:40,973 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:48:45,997 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:48:47,582 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:48:47,582 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:48:49,890 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: partial_history
+2023-06-25 18:48:49,893 DEBUG   SenderThread:88283 [sender.py:send():369] send: history
+2023-06-25 18:48:49,894 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:48:49,894 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:48:50,246 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:48:51,905 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:48:52,256 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:48:56,931 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:49:01,957 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:49:02,586 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:49:02,587 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:49:05,747 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: partial_history
+2023-06-25 18:49:05,748 DEBUG   SenderThread:88283 [sender.py:send():369] send: history
+2023-06-25 18:49:05,748 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:49:05,750 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:49:05,953 DEBUG   SenderThread:88283 [sender.py:send():369] send: stats
+2023-06-25 18:49:06,314 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:49:06,960 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:49:08,325 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:49:11,978 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:49:16,999 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:49:17,591 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:49:17,592 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:49:21,788 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: partial_history
+2023-06-25 18:49:21,792 DEBUG   SenderThread:88283 [sender.py:send():369] send: history
+2023-06-25 18:49:21,793 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:49:21,795 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:49:22,388 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:49:22,388 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:49:22,801 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:49:27,819 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:49:32,582 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:49:32,583 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:49:33,760 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:49:35,940 DEBUG   SenderThread:88283 [sender.py:send():369] send: stats
+2023-06-25 18:49:37,321 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: partial_history
+2023-06-25 18:49:37,322 DEBUG   SenderThread:88283 [sender.py:send():369] send: history
+2023-06-25 18:49:37,322 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:49:37,322 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:49:37,448 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:49:38,453 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:49:39,333 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:49:44,355 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:49:47,575 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:49:47,576 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:49:49,747 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:49:52,568 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: partial_history
+2023-06-25 18:49:52,569 DEBUG   SenderThread:88283 [sender.py:send():369] send: history
+2023-06-25 18:49:52,569 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:49:52,569 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:49:53,521 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:49:54,523 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:49:55,583 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:50:00,607 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:50:02,571 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:50:02,573 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:50:05,764 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:50:05,932 DEBUG   SenderThread:88283 [sender.py:send():369] send: stats
+2023-06-25 18:50:07,795 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: partial_history
+2023-06-25 18:50:07,796 DEBUG   SenderThread:88283 [sender.py:send():369] send: history
+2023-06-25 18:50:07,796 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:50:07,798 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:50:08,584 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:50:10,590 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:50:10,814 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:50:15,839 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:50:17,574 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:50:17,576 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:50:21,775 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:50:23,016 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: partial_history
+2023-06-25 18:50:23,017 DEBUG   SenderThread:88283 [sender.py:send():369] send: history
+2023-06-25 18:50:23,018 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:50:23,018 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:50:23,650 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:50:24,656 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:50:27,034 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:50:32,061 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:50:32,579 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:50:32,580 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:50:35,936 DEBUG   SenderThread:88283 [sender.py:send():369] send: stats
+2023-06-25 18:50:37,946 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:50:38,360 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: partial_history
+2023-06-25 18:50:38,361 DEBUG   SenderThread:88283 [sender.py:send():369] send: history
+2023-06-25 18:50:38,361 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:50:38,364 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:50:38,713 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:50:40,722 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:50:43,390 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:50:47,582 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:50:47,585 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:50:48,777 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:50:53,801 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:50:55,593 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: partial_history
+2023-06-25 18:50:55,595 DEBUG   SenderThread:88283 [sender.py:send():369] send: history
+2023-06-25 18:50:55,596 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:50:55,596 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:50:55,782 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:50:56,788 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:50:59,616 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:51:02,583 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:51:02,584 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:51:04,800 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:51:05,941 DEBUG   SenderThread:88283 [sender.py:send():369] send: stats
+2023-06-25 18:51:09,961 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:51:12,587 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: partial_history
+2023-06-25 18:51:12,590 DEBUG   SenderThread:88283 [sender.py:send():369] send: history
+2023-06-25 18:51:12,591 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:51:12,592 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:51:12,849 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:51:14,860 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:51:15,606 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:51:17,588 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:51:17,589 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:51:20,770 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:51:25,794 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:51:29,230 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: partial_history
+2023-06-25 18:51:29,230 DEBUG   SenderThread:88283 [sender.py:send():369] send: history
+2023-06-25 18:51:29,231 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:51:29,231 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:51:29,924 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:51:30,928 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:51:31,241 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:51:32,589 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:51:32,590 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:51:35,945 DEBUG   SenderThread:88283 [sender.py:send():369] send: stats
+2023-06-25 18:51:36,947 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:51:41,966 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:51:46,063 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: partial_history
+2023-06-25 18:51:46,065 DEBUG   SenderThread:88283 [sender.py:send():369] send: history
+2023-06-25 18:51:46,066 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:51:46,069 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:51:47,007 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:51:47,075 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:51:47,594 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:51:47,595 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:51:49,017 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:51:52,789 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:51:57,814 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:52:02,598 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:52:02,599 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:52:02,794 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: partial_history
+2023-06-25 18:52:02,795 DEBUG   SenderThread:88283 [sender.py:send():369] send: history
+2023-06-25 18:52:02,795 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:52:02,796 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:52:03,082 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:52:03,800 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:52:05,093 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:52:05,951 DEBUG   SenderThread:88283 [sender.py:send():369] send: stats
+2023-06-25 18:52:08,967 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:52:13,991 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:52:17,603 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:52:17,606 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:52:19,791 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:52:20,239 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: partial_history
+2023-06-25 18:52:20,239 DEBUG   SenderThread:88283 [sender.py:send():369] send: history
+2023-06-25 18:52:20,240 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:52:20,241 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:52:21,163 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:52:21,164 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:52:25,264 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:52:30,280 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:52:32,607 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:52:32,608 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:52:35,779 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:52:35,953 DEBUG   SenderThread:88283 [sender.py:send():369] send: stats
+2023-06-25 18:52:36,525 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: partial_history
+2023-06-25 18:52:36,527 DEBUG   SenderThread:88283 [sender.py:send():369] send: history
+2023-06-25 18:52:36,527 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:52:36,528 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:52:37,235 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:52:39,245 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:52:41,547 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:52:46,567 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:52:47,612 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:52:47,613 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:52:51,804 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:52:52,398 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: partial_history
+2023-06-25 18:52:52,399 DEBUG   SenderThread:88283 [sender.py:send():369] send: history
+2023-06-25 18:52:52,399 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:52:52,401 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:52:53,300 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:52:53,300 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:52:57,423 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:53:02,439 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:53:02,616 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:53:02,616 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:53:05,954 DEBUG   SenderThread:88283 [sender.py:send():369] send: stats
+2023-06-25 18:53:07,961 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:53:08,363 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: partial_history
+2023-06-25 18:53:08,365 DEBUG   SenderThread:88283 [sender.py:send():369] send: history
+2023-06-25 18:53:08,366 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:53:08,366 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:53:08,367 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:53:11,377 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:53:13,385 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:53:17,617 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:53:17,618 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:53:18,797 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:53:23,822 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:53:26,230 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: partial_history
+2023-06-25 18:53:26,233 DEBUG   SenderThread:88283 [sender.py:send():369] send: history
+2023-06-25 18:53:26,234 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:53:26,237 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:53:26,441 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:53:27,448 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:53:29,247 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:53:32,622 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:53:32,624 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:53:34,807 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:53:35,959 DEBUG   SenderThread:88283 [sender.py:send():369] send: stats
+2023-06-25 18:53:39,976 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:53:43,737 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: partial_history
+2023-06-25 18:53:43,739 DEBUG   SenderThread:88283 [sender.py:send():369] send: history
+2023-06-25 18:53:43,740 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: summary_record
+2023-06-25 18:53:43,741 INFO    SenderThread:88283 [sender.py:_save_file():1354] saving file wandb-summary.json with policy end
+2023-06-25 18:53:44,530 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/wandb-summary.json
+2023-06-25 18:53:45,532 INFO    Thread-12 :88283 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/mikhailoleynik/Desktop/recsys_project/NewsRecommendations/src/wandb/run-20230625_184705-rx9e2p9o/files/output.log
+2023-06-25 18:53:45,750 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:53:47,626 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: stop_status
+2023-06-25 18:53:47,627 DEBUG   SenderThread:88283 [sender.py:send_request():396] send_request: stop_status
+2023-06-25 18:53:50,819 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:53:55,840 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:54:00,859 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:54:05,881 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:54:05,961 DEBUG   SenderThread:88283 [sender.py:send():369] send: stats
+2023-06-25 18:54:10,984 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:54:16,005 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:54:21,026 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:54:26,050 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:54:31,071 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:54:35,966 DEBUG   SenderThread:88283 [sender.py:send():369] send: stats
+2023-06-25 18:54:36,972 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:54:41,993 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:54:47,017 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:54:52,037 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:54:57,053 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:55:02,078 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:55:05,971 DEBUG   SenderThread:88283 [sender.py:send():369] send: stats
+2023-06-25 18:55:07,981 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:55:13,006 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:55:18,031 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:55:23,049 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:55:28,074 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:55:33,097 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:55:35,972 DEBUG   SenderThread:88283 [sender.py:send():369] send: stats
+2023-06-25 18:55:38,984 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:55:44,002 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:55:49,023 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
+2023-06-25 18:55:54,046 DEBUG   HandlerThread:88283 [handler.py:handle_request():144] handle_request: status_report
