@@ -36,7 +36,9 @@ class CtrEncoder(nn.Module):
 
         else:
             x = x1.squeeze().flatten().unsqueeze(1)
-        x = self.proj(x)
+
+        skip = x1.repeat(x.size()[0])
+        x = F.sigmoid(self.proj(x) + skip)
         return x
 
 

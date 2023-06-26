@@ -252,13 +252,18 @@ def test(rank, args):
         for input_ids, _ctr, _pop in tqdm(news_dataloader):
             input_ids = input_ids.cuda(rank)
 
-            _ctr = _ctr.cuda(rank)
-            _ctr_vec = _ctr.view(-1, 1, 1).float()
-            _ctr_vec = model.ctr_encoder(_ctr_vec)
+            if args.use_ctr:
+                _ctr = _ctr.cuda(rank)
+                _ctr_vec = _ctr.view(-1, 1, 1).float()
+                _ctr_vec = model.ctr_encoder(_ctr_vec)
 
-            _pop = _pop.cuda(rank)
-            _pop_vec = _pop.view(-1, 1, 1).float()
-            _pop_vec = model.ctr_encoder(_pop_vec)
+                _pop = _pop.cuda(rank)
+                _pop_vec = _pop.view(-1, 1, 1).float()
+                _pop_vec = model.ctr_encoder(_pop_vec)
+
+            else:
+                _ctr_vec = None
+                _pop_vec = None
 
             news_vec = model.news_encoder(input_ids, _ctr_vec, _pop_vec)
 
@@ -378,13 +383,19 @@ def test(rank, args):
         wandb.log(
             {
                 "AUC": np.mean(AUC),
-                "nDCG5": np.mean(MRR),
-                "nDCG10": np.mean(nDCG5),
-                "precision10": np.mean(nDCG10),
-                "recall10": np.mean(precision10),
-                "recall20": np.mean(recall10),
-                "MRR": np.mean(recall20),
+                "nDCG5": np.mean(nDCG5),
+                "nDCG10": np.mean(nDCG10),
+                "precision10": np.mean(precision10),
+                "recall10": np.mean(recall10),
+                "MRR": np.mean(MRR),
             }
+            #                 "AUC": np.mean(AUC),
+            # "nDCG5": np.mean(MRR),
+            # "nDCG10": np.mean(nDCG5),
+            # "precision10": np.mean(nDCG10),
+            # "recall10": np.mean(precision10),
+            # "recall20": np.mean(recall10),
+            # "MRR": np.mean(recall20),
         )
 
         print_metrics(

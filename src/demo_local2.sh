@@ -14,7 +14,7 @@ log_steps=10
 num_words_title=20
 load_ckpt_name='../model/NRMS/epoch-5.pt'
 use_ctr=True
-use_pop=True
+use_pop=False
 
 
 if [ ${mode} == train ]
