@@ -1,6 +1,6 @@
 # News Recommendation
 
-Implementation of NRMS model for MIND dataset. 
+Implementation and modification of NRMS model for MIND dataset. Props to yflyl613 for initial implementation.
 
 ### Requirements
 
@@ -10,6 +10,7 @@ Implementation of NRMS model for MIND dataset.
 - scikit-learn
 - nltk
 - tqdm
+- recbole (optional)
 
 
 ### Usage
@@ -17,7 +18,7 @@ Implementation of NRMS model for MIND dataset.
 - **Clone this repository**	
 
   ```bash
-  git clone https://github.com/yflyl613/NewsRecommendation.git
+  git clone https://github.com/Mikezz1/NewsRecommendation.git
   cd NewsRecommendation
   ```
   
@@ -46,6 +47,25 @@ Implementation of NRMS model for MIND dataset.
   # test
   ./run.sh test <checkpoint name>
   # E.g. ./run.sh test epoch-1.pt
+  ```
+
+- **To run baseline models using Recbole**
+
+First, download MIND-small and convert it to atomic files
+  ```bash
+  cd baselines
+  sh prepare_data.sh
+  ```
+
+Then, you can modify configs in `configs` directory as you wish and run training with the following command (if you want to use default models)
+  ```bash
+  sh run_experiments.sh
+  ```
+
+or this command if you wish to use custom model
+
+  ```bash
+  python train_custom.py
   ```
 
 
