@@ -1,0 +1,52 @@
+
+
+dataset: 'mind_small_tfidf_merged'
+
+# general 
+gpu_id: 0
+use_gpu: True
+seed: 2020
+state: INFO
+reproducibility: True
+checkpoint_dir: saved
+show_progress: True
+save_dataset: False
+dataset_save_path: None
+save_dataloaders: False
+dataloaders_save_path: None
+log_wandb: True
+
+
+load_col:  
+    inter: ['user_id', 'item_id', 'label', 'timestamp'] 
+    item: ['item_id','category','sub_category','title']
+LABEL_FIELD: 'label'
+USER_ID_FIELD: 'user_id'
+ITEM_ID_FIELD: 'item_id'
+#numerical_features: [']
+
+
+# benchmark_filename: ['dev','dev', 'dev']
+repeatable: False
+epochs: 40
+train_batch_size: 2048
+eval_batch_size: 4096
+
+double_tower: True
+embedding_size: 10
+learning_rate: 0.0001
+dropout_prob: 0.2
+mlp_hidden_size: [128, 128, 128]
+
+eval_args:
+    split:
+        RS: [0.68, 0.32,0] 
+    group_by: None
+    order: 'TO'
+    mode: 'uni10'
+eval_step: 8
+ 
+metrics: ['Recall', 'MAP', 'NDCG', 'Hit', 'Precision', 'MRR']
+topk: 10
+valid_metric: 'NDCG@10'
+metric_decimal_place: 4

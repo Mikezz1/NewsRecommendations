@@ -1,0 +1,38 @@
+
+model: 'NRMS'
+dataset: 'mind_small_with_items'
+
+# general 
+gpu_id: 0
+use_gpu: True
+seed: 2020
+state: INFO
+reproducibility: True
+checkpoint_dir: saved
+show_progress: True
+save_dataset: False
+dataset_save_path: None
+save_dataloaders: False
+dataloaders_save_path: None
+log_wandb: True
+
+
+load_col:  
+    inter: ['user_id', 'item_id', 'label', 'timestamp'] 
+    item: ['item_id', 'category', 'sub_category', 'title']
+LABEL_FIELD: 'label'
+
+
+benchmark_filename: ['train','dev', 'dev']
+repeatable: False
+epochs: 25
+train_batch_size: 256
+eval_batch_size: 512
+embedding_size: 32
+eval_args:
+    mode: 'uni10' #[labeled, full, uni10, pop]
+
+metrics: ['Recall', 'MAP', 'NDCG', 'Hit', 'Precision', 'MRR']
+topk: 10
+valid_metric: 'NDCG@10'
+metric_decimal_place: 4

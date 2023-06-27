@@ -1,0 +1,60 @@
+
+model: 'Pop'
+dataset: 'mind_small'
+
+
+# general 
+gpu_id: 0
+use_gpu: True
+seed: 2020
+state: INFO
+reproducibility: True
+checkpoint_dir: saved
+show_progress: True
+save_dataset: False
+dataset_save_path: None
+save_dataloaders: False
+dataloaders_save_path: None
+log_wandb: False
+
+load_col:  
+    inter: ['user_id', 'item_id', 'label', 'timestamp'] 
+LABEL_FIELD: 'label'
+# RATING_FIELD: 'label'
+#benchmark_filename: ['train','dev', 'dev']
+
+
+repeatable: False
+
+# training 
+
+epochs: 1
+train_batch_size: 4096
+eval_batch_size: 4096
+embedding_size: 128
+
+eval_args:
+    mode: 'labeled'
+    # split: {'RS':[0.8,0.1,0.1]}
+    # order: 'TO'
+    # group_by: 'none'
+
+# train_neg_sample_args: 
+    # distribution: 'uniform'
+    # sample_num': 1
+    # alpha: 1.0
+    # dynamic: False,
+    # candidate_num: 0
+
+# eval_args:
+#     eval_neg_sample_args:
+#         distribution: uniform
+#         sample_num: 10
+#         alpha: 1.0
+#         dynamic: False
+#         candidate_num: 10
+metrics: ['AUC']
+#['Recall', 'MAP', 'NDCG', 'Hit', 'Precision', 'MRR']
+topk: 10
+valid_metric: 'AUC'
+metric_decimal_place: 4

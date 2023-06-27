@@ -247,6 +247,7 @@ def test(rank, args):
         news_dataset, batch_size=args.batch_size, num_workers=4
     )
 
+    pop_hist = []
     news_scoring = []
     with torch.no_grad():
         for input_ids, _ctr, _pop in tqdm(news_dataloader):
@@ -270,6 +271,7 @@ def test(rank, args):
             # print(news_vec.size())
             news_vec = news_vec.to(torch.device("cpu")).detach().numpy()
             news_scoring.extend(news_vec)
+            pop_hist.extend(_pop.to(torch.device("cpu")).detach().numpy())
 
     news_scoring = np.array(news_scoring)
     logging.info("news scoring num: {}".format(news_scoring.shape[0]))
@@ -292,11 +294,10 @@ def test(rank, args):
         log_mask = torch.FloatTensor([x[1] for x in tuple_list])
         news_vecs = [x[2] for x in tuple_list]
         labels = [x[3] for x in tuple_list]
-        _news_ctr = [x[4] for x in tuple_list]
-        _user_ctr = [x[5] for x in tuple_list]
-        return (log_vecs, log_mask, news_vecs, labels, _news_ctr, _user_ctr)
+        _news_pop = [x[4] for x in tuple_list]
+        return (log_vecs, log_mask, news_vecs, labels, _news_pop)
 
-    dataset = DatasetTest(data_file_path, news_index, news_scoring, args, news_ctr)
+    dataset = DatasetTest(data_file_path, news_index, news_scoring, args, pop_hist)
     dataloader = DataLoader(dataset, batch_size=args.batch_size, collate_fn=collate_fn)
 
     from metrics import roc_auc_score, ndcg_score, mrr_score, precision, recall
@@ -308,6 +309,7 @@ def test(rank, args):
     Precision10 = []
     Recall10 = []
     Recall20 = []
+    POP = []
 
     def print_metrics(rank, cnt, x):
         logging.info(
@@ -322,11 +324,14 @@ def test(rank, args):
     def get_sum(arr):
         return [np.array(i).sum() for i in arr]
 
+    def calc_top_pop(y_score, y_pop):
+        top = np.argmax(y_score)
+        # print(y_pop[top].item())
+        return y_pop[top].item()
+
     local_sample_num = 0
 
-    for cnt, (log_vecs, log_mask, news_vecs, labels, _news_ctr, _user_ctr) in enumerate(
-        dataloader
-    ):
+    for cnt, (log_vecs, log_mask, news_vecs, labels, news_pop) in enumerate(dataloader):
         local_sample_num += log_vecs.shape[0]
 
         if args.enable_gpu:
@@ -340,12 +345,17 @@ def test(rank, args):
             .numpy()
         )
 
-        for user_vec, news_vec, label in zip(user_vecs, news_vecs, labels):
+        for user_vec, news_vec, label, news_pop in zip(
+            user_vecs, news_vecs, labels, news_pop
+        ):
             if label.mean() == 0 or label.mean() == 1:
                 continue
-
+            # print(news_vec.shape, user_vec.shape, len(labels))
             score = np.dot(news_vec, user_vec)
 
+            # print('SIZES')
+            # print(len(label), len(score), len(news_pop))
+            pop = calc_top_pop(score, news_pop)
             auc = roc_auc_score(label, score)
             mrr = mrr_score(label, score)
             ndcg5 = ndcg_score(label, score, k=5)
@@ -361,12 +371,16 @@ def test(rank, args):
             Precision10.append(precision10)
             Recall10.append(recall10)
             Recall20.append(recall20)
+            POP.append(pop)
 
         if cnt % args.log_steps == 0:
+            print(np.mean(POP))
             print_metrics(
                 rank,
                 local_sample_num,
-                get_mean([AUC, MRR, nDCG5, nDCG10, Precision10, Recall10, Recall20]),
+                get_mean(
+                    [AUC, MRR, nDCG5, nDCG10, Precision10, Recall10, Recall20, POP]
+                ),
             )
 
     logging.info("[{}] local_sample_num: {}".format(rank, local_sample_num))
@@ -388,6 +402,7 @@ def test(rank, args):
                 "precision10": np.mean(precision10),
                 "recall10": np.mean(recall10),
                 "MRR": np.mean(MRR),
+                "POP": np.mean(POP),
             }
             #                 "AUC": np.mean(AUC),
             # "nDCG5": np.mean(MRR),
